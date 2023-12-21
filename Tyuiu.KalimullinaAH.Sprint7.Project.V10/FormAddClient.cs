@@ -17,14 +17,11 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         public FormAddClient()
         {
             InitializeComponent();
-            openFileDialogTask_KAH.Filter = "Значения, разделённые запятыми(*.csv)|*csv|Все файлы(*.*)|*.*";
-            saveFileDialogTask_KAH.Filter = "Значения, разделённые запятыми(*.csv)|*csv|Все файлы(*.*)|*.*";
-            dateTimePicker_KAH.CustomFormat = "DD MM YYYY";
         }
         DataService ds = new DataService();
 
 
-        string path = @"C:\Users\boulevarovaalina\Desktop\Новая папка\InPutFile.csv";
+        string pathClients = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Clients.csv";
 
 
 
@@ -36,31 +33,39 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 if (res == DialogResult.OK)
                 {
                     string FileName = openFileDialogTask_KAH.FileName;
-
-                    Encoding encoding = Encoding.UTF8;
-                    string[,] DataMatrix = ds.GetData(FileName, encoding);
-
+                    string[,] DataMatrix = ds.GetData(FileName);
                     int rows = DataMatrix.GetLength(0);
                     int columns = DataMatrix.GetLength(1);
+                    string path = openFileDialogTask_KAH.FileName;
 
-                    dataGridViewClient_KAH.RowCount = rows + 1;
+                    dataGridViewClient_KAH.RowCount = rows + 1; 
                     dataGridViewClient_KAH.ColumnCount = columns;
+
+                    dataGridViewClient_KAH.Columns[1].HeaderText = "Имя";
+                    dataGridViewClient_KAH.Columns[0].HeaderText = "Фамилия";
+                    dataGridViewClient_KAH.Columns[2].HeaderText = "Отчество";
+                    dataGridViewClient_KAH.Columns[3].HeaderText = "Дата рождения";
+                    dataGridViewClient_KAH.Columns[4].HeaderText = "Номер телефона ";
+                    dataGridViewClient_KAH.Columns[5].HeaderText = "Адрес";
+                    dataGridViewClient_KAH.Columns[6].HeaderText = "Персональная скидка";
+
                     for (int i = 0; i < columns; i++)
+
                     {
                         dataGridViewClient_KAH.Columns[i].Width = 100;
                     }
-
                     for (int r = 0; r < rows; r++)
+
                     {
                         for (int c = 0; c < columns; c++)
-                        {
                             dataGridViewClient_KAH.Rows[r].Cells[c].Value = DataMatrix[r, c];
-                        }
                     }
                 }
+
                 else
+                
                 {
-                    throw new Exception("Файл не выбран!");
+                    throw new Exception("Файл не выбран!"); 
                 }
             }
             catch (Exception ex)
@@ -68,40 +73,31 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-    
-    
-
-
-    private void button1_Click(object sender, EventArgs e)
-                
-             {
-                    FormEditClient formEditClient = new FormEditClient();
-                    formEditClient.Show();
-                
-              }
 
         private void buttonAdd_KAH_Click(object sender, EventArgs e)
         {
             try
             {
-                string[] row = new string[] { $"{textBoxName_KAH.Text}", $"{textBoxSname_KAH.Text}",
-                $"{textBoxPname_KAH.Text}", $"{dateTimePicker_KAH.Text}",
-                $"{textBoxPhone_KAH.Text}", $"{textBoxAdress_KAH.Text}", };
+                string[] row = new string[] { $"{textBoxSname_KAH.Text}", $"{textBoxName_KAH.Text}", $"{textBoxPname_KAH.Text}", $"{dateTimePicker_KAH.Text}", $"{textBoxPhone_KAH.Text}", $"{textBoxAdress_KAH.Text}", $"{numericUpDownDiscont_KAH.Text}" };
+
                 dataGridViewClient_KAH.Rows.Add(row);
-                bool completed = ds.AddNewData(path, row);
+                bool completed = ds.AddNewData(pathClients, row);
                 if (completed)
                 {
                     MessageBox.Show("Данные добавлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+        private void buttonSave_KAH_Click(object sender, EventArgs e)
+        {
+
         }
     }
+}
+    
+    
+
 
    
-
-}

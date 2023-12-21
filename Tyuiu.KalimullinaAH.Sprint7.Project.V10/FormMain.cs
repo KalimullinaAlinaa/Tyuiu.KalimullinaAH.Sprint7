@@ -21,9 +21,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         public FormMain() 
         {
             InitializeComponent();
-            openFileDialogOrder_KAH.Filter = "Значения, разделённые запятыми(*.csv)|*csv|Все файлы(*.*)|*.*"; 
-            saveFileDialogOrder_KAH.Filter = "Значения, разделённые запятыми(*.csv)|*csv|Все файлы(*.*)|*.*";
-            dateTimePicker_KAH.CustomFormat = "DD MM YYYY";
         }
        
         DataService ds = new DataService(); 
@@ -38,17 +35,26 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 if (res == DialogResult.OK)
                 {
                     string FileName = openFileDialogOrder_KAH.FileName;
-                    Encoding encoding = Encoding.UTF8;
-                    string[,] DataMatrix = ds.GetData(FileName, encoding);
+                    string[,] DataMatrix = ds.GetData(FileName);
                     int rows = DataMatrix.GetLength(0); 
                     int columns = DataMatrix.GetLength(1);
                     string path = openFileDialogOrder_KAH.FileName;
 
-                    dataGridViewOrder_KAH.RowCount = rows + 1; dataGridViewOrder_KAH.ColumnCount = columns; 
+                    dataGridViewOrder_KAH.RowCount = rows + 1;
+                    dataGridViewOrder_KAH.ColumnCount = columns;
+                    dataGridViewOrder_KAH.Columns[0].HeaderText = "Наименование товара";
+                    dataGridViewOrder_KAH.Columns[1].HeaderText = "Стоимость";
+                    dataGridViewOrder_KAH.Columns[2].HeaderText = "ФИО клиента";
+                    dataGridViewOrder_KAH.Columns[3].HeaderText = "Номер телефона клиента";
+                    dataGridViewOrder_KAH.Columns[4].HeaderText = "Номер телефона клиента";
+                    dataGridViewOrder_KAH.Columns[5].HeaderText = "Кол-во товара";
+                    dataGridViewOrder_KAH.Columns[6].HeaderText = "Дата оформления заказа";
+                    dataGridViewOrder_KAH.Columns[7].HeaderText = "Артикул товара";
+
                     for (int i = 0; i < columns; i++)
                   
                     { 
-                        dataGridViewOrder_KAH.Columns[i].Width = 100;
+                        dataGridViewOrder_KAH.Columns[i].Width = 150;
                     }
                     for (int r = 0; r < rows; r++)
                     
@@ -68,13 +74,15 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             {
                 string[] row = new string[] { $"{textBoxNameProduct_KAH.Text}", $"{textBoxPrice_KAH.Text}", $"{textBoxFullName_KAH.Text}", $"{textBoxNumberOfMobile_KAH.Text}", $"{numericUpDownCount_KAH.Text}", $"{dateTimePicker_KAH.Text}", $"{textBoxSum_KAH.Text}", $"{textBoxArticul_KAH.Text}" };
 
-                dataGridViewOrder_KAH.Rows.Add(row); bool completed = ds.AddNewData(pathOrders, row);
+                dataGridViewOrder_KAH.Rows.Add(row);
+                bool completed = ds.AddNewData(pathOrders, row);
                 if (completed)
                 { 
                     MessageBox.Show("Данные добавлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            }
         }
         private void buttonFindClient_KAH_Click(object sender, EventArgs e)
         {
@@ -85,6 +93,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
+                
 
                 while (!parser.EndOfData)
                 {
@@ -104,9 +113,13 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                             var clientFullName = $"{clientLastName} {clientFirstName} {clientMiddleName}";
                             var clientDiscontTxt = $"{clientDiscont}";
 
-                            textBoxFullName_KAH.Text = clientFullName;
+                            // Преобразование строки в кодировку Windows-1251
+                            var encoding = Encoding.GetEncoding("Windows-1251");
+                            var clientFullNameRussian = encoding.GetString(encoding.GetBytes(clientFullName));
+
+                            textBoxFullName_KAH.Text = clientFullNameRussian;
                             textBoxClientDiscont_KAH.Text = clientDiscontTxt;
-                            return;
+                            return;;
                         }
                     }
                 }
@@ -160,44 +173,19 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             textBoxSum_KAH.Text = orderTotal.ToString();
         }
 
-        private void buttonSaveTable_KAH_Click(object sender, EventArgs e)
+    
+
+        private void buttonAddClient_KAH_Click(object sender, EventArgs e)
         {
-            DateTime dateTime = dateTimePicker_KAH.Value;
-            string fullName = textBoxFullName_KAH.Text;
-            string articul = textBoxArticul_KAH.Text;
-            string numberOfMobile = textBoxNumberOfMobile_KAH.Text;
-            string name = textBoxNameProduct_KAH.Text;
-            decimal price = decimal.Parse(textBoxPrice_KAH.Text);
-            int count = (int)numericUpDownCount_KAH.Value;
-            decimal discount = decimal.Parse(textBoxClientDiscont_KAH.Text);
-            decimal sum = decimal.Parse(textBoxSum_KAH.Text);
-
-            // Создание строки данных
-            string data = $"{dateTime},{fullName},{articul},{numberOfMobile},{name},{price},{count},{discount},{sum}";
-
-            // Проверка наличия файла CSV
-            if (!File.Exists(pathClients))
-            {
-                // Если файл не существует, создаем заголовки столбцов
-                string headers = "Date,Full Name,Articul,Mobile Number,Product Name,Price,Count,Discount,Total Sum";
-                File.WriteAllText(pathClients, headers + Environment.NewLine);
-            }
-
-            // Добавление данных в файл CSV
-            File.AppendAllText(pathClients, data + Environment.NewLine);
-
-            // Очистка текстовых полей
-            textBoxNameProduct_KAH.Text = "";
-            textBoxPrice_KAH.Text = "";
-            numericUpDownCount_KAH.Value = 0;
-            textBoxClientDiscont_KAH.Text = "";
-            textBoxFullName_KAH.Text = "";
-            textBoxArticul_KAH.Text = "";
-            textBoxNumberOfMobile_KAH.Text = "";
-            textBoxSum_KAH.Text = "";
+            FormAddClient add = new FormAddClient();
+            add.ShowDialog();
         }
 
-
+        private void buttonEditClient_KAH_Click(object sender, EventArgs e)
+        {
+            FormEditClient edit = new FormEditClient();
+            edit.ShowDialog();
+        }
     }
 }
 

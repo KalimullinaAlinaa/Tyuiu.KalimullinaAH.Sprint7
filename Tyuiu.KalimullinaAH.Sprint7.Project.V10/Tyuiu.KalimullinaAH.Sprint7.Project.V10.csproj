@@ -162,5 +162,8 @@
   <ItemGroup>
     <None Include="Resources\table_edit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart_bar.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
