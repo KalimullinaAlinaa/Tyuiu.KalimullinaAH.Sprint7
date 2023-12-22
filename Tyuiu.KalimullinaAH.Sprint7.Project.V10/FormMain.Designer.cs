@@ -30,13 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelButton_KAH = new System.Windows.Forms.Panel();
-            this.buttonInfo_KAH = new System.Windows.Forms.Button();
-            this.buttonAddData_KAH = new System.Windows.Forms.Button();
-            this.buttonOpenTable_KAH = new System.Windows.Forms.Button();
             this.panelDataGridView_KAH = new System.Windows.Forms.Panel();
             this.groupBoxAddNewOrder_KAH = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonCalculateOrder_KAH = new System.Windows.Forms.Button();
             this.labelNameOfProduct_KAH = new System.Windows.Forms.Label();
             this.textBoxNameProduct_KAH = new System.Windows.Forms.TextBox();
             this.labelSum_KAH = new System.Windows.Forms.Label();
@@ -52,22 +48,26 @@
             this.labelDiscont_KAH = new System.Windows.Forms.Label();
             this.labelFullName_KAH = new System.Windows.Forms.Label();
             this.groupBoxFindProduct_KAH = new System.Windows.Forms.GroupBox();
-            this.buttonFindProduct_KAH = new System.Windows.Forms.Button();
             this.textBoxArticul_KAH = new System.Windows.Forms.TextBox();
             this.labelArticul_KAH = new System.Windows.Forms.Label();
             this.groupBoxFindClient_KAH = new System.Windows.Forms.GroupBox();
             this.textBoxNumberOfMobile_KAH = new System.Windows.Forms.TextBox();
             this.labelNumberOfMobile_KAH = new System.Windows.Forms.Label();
-            this.buttonFindClient_KAH = new System.Windows.Forms.Button();
             this.dataGridViewOrder_KAH = new System.Windows.Forms.DataGridView();
             this.groupBoxButton_KAH = new System.Windows.Forms.GroupBox();
+            this.openFileDialogOrder_KAH = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialogOrder_KAH = new System.Windows.Forms.SaveFileDialog();
+            this.toolTipOrder_KAH = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonCalculateOrder_KAH = new System.Windows.Forms.Button();
+            this.buttonFindProduct_KAH = new System.Windows.Forms.Button();
+            this.buttonFindClient_KAH = new System.Windows.Forms.Button();
             this.buttonChart_KAH = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonEditClient_KAH = new System.Windows.Forms.Button();
             this.buttonAddClient_KAH = new System.Windows.Forms.Button();
-            this.openFileDialogOrder_KAH = new System.Windows.Forms.OpenFileDialog();
-            this.saveFileDialogOrder_KAH = new System.Windows.Forms.SaveFileDialog();
-            this.toolTipOrder_KAH = new System.Windows.Forms.ToolTip(this.components);
+            this.buttonInfo_KAH = new System.Windows.Forms.Button();
+            this.buttonAddData_KAH = new System.Windows.Forms.Button();
+            this.buttonOpenTable_KAH = new System.Windows.Forms.Button();
             this.panelButton_KAH.SuspendLayout();
             this.panelDataGridView_KAH.SuspendLayout();
             this.groupBoxAddNewOrder_KAH.SuspendLayout();
@@ -89,36 +89,6 @@
             this.panelButton_KAH.Name = "panelButton_KAH";
             this.panelButton_KAH.Size = new System.Drawing.Size(1093, 100);
             this.panelButton_KAH.TabIndex = 0;
-            // 
-            // buttonInfo_KAH
-            // 
-            this.buttonInfo_KAH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonInfo_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.help;
-            this.buttonInfo_KAH.Location = new System.Drawing.Point(951, 12);
-            this.buttonInfo_KAH.Name = "buttonInfo_KAH";
-            this.buttonInfo_KAH.Size = new System.Drawing.Size(130, 65);
-            this.buttonInfo_KAH.TabIndex = 0;
-            this.buttonInfo_KAH.UseVisualStyleBackColor = true;
-            // 
-            // buttonAddData_KAH
-            // 
-            this.buttonAddData_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.table_save;
-            this.buttonAddData_KAH.Location = new System.Drawing.Point(170, 12);
-            this.buttonAddData_KAH.Name = "buttonAddData_KAH";
-            this.buttonAddData_KAH.Size = new System.Drawing.Size(130, 65);
-            this.buttonAddData_KAH.TabIndex = 0;
-            this.buttonAddData_KAH.UseVisualStyleBackColor = true;
-            this.buttonAddData_KAH.Click += new System.EventHandler(this.buttonAddData_KAH_Click_1);
-            // 
-            // buttonOpenTable_KAH
-            // 
-            this.buttonOpenTable_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.table_add1;
-            this.buttonOpenTable_KAH.Location = new System.Drawing.Point(12, 12);
-            this.buttonOpenTable_KAH.Name = "buttonOpenTable_KAH";
-            this.buttonOpenTable_KAH.Size = new System.Drawing.Size(130, 65);
-            this.buttonOpenTable_KAH.TabIndex = 0;
-            this.buttonOpenTable_KAH.UseVisualStyleBackColor = true;
-            this.buttonOpenTable_KAH.Click += new System.EventHandler(this.buttonOpenTable_KAH_Click);
             // 
             // panelDataGridView_KAH
             // 
@@ -168,16 +138,6 @@
             this.groupBox4.Size = new System.Drawing.Size(550, 240);
             this.groupBox4.TabIndex = 26;
             this.groupBox4.TabStop = false;
-            // 
-            // buttonCalculateOrder_KAH
-            // 
-            this.buttonCalculateOrder_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.calculator;
-            this.buttonCalculateOrder_KAH.Location = new System.Drawing.Point(196, 166);
-            this.buttonCalculateOrder_KAH.Name = "buttonCalculateOrder_KAH";
-            this.buttonCalculateOrder_KAH.Size = new System.Drawing.Size(345, 56);
-            this.buttonCalculateOrder_KAH.TabIndex = 10;
-            this.buttonCalculateOrder_KAH.UseVisualStyleBackColor = true;
-            this.buttonCalculateOrder_KAH.Click += new System.EventHandler(this.buttonCalculateOrder_KAH_Click);
             // 
             // labelNameOfProduct_KAH
             // 
@@ -269,6 +229,7 @@
             // textBoxFullName_KAH
             // 
             this.textBoxFullName_KAH.Location = new System.Drawing.Point(13, 121);
+            this.textBoxFullName_KAH.Multiline = true;
             this.textBoxFullName_KAH.Name = "textBoxFullName_KAH";
             this.textBoxFullName_KAH.Size = new System.Drawing.Size(166, 22);
             this.textBoxFullName_KAH.TabIndex = 6;
@@ -302,16 +263,6 @@
             this.groupBoxFindProduct_KAH.TabIndex = 25;
             this.groupBoxFindProduct_KAH.TabStop = false;
             this.groupBoxFindProduct_KAH.Text = "Поиск товара";
-            // 
-            // buttonFindProduct_KAH
-            // 
-            this.buttonFindProduct_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.page_white_magnify;
-            this.buttonFindProduct_KAH.Location = new System.Drawing.Point(188, 40);
-            this.buttonFindProduct_KAH.Name = "buttonFindProduct_KAH";
-            this.buttonFindProduct_KAH.Size = new System.Drawing.Size(75, 51);
-            this.buttonFindProduct_KAH.TabIndex = 19;
-            this.buttonFindProduct_KAH.UseVisualStyleBackColor = true;
-            this.buttonFindProduct_KAH.Click += new System.EventHandler(this.buttonFindProduct_KAH_Click);
             // 
             // textBoxArticul_KAH
             // 
@@ -357,16 +308,6 @@
             this.labelNumberOfMobile_KAH.TabIndex = 17;
             this.labelNumberOfMobile_KAH.Text = "Введите номер телефона:";
             // 
-            // buttonFindClient_KAH
-            // 
-            this.buttonFindClient_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.page_white_magnify;
-            this.buttonFindClient_KAH.Location = new System.Drawing.Point(188, 46);
-            this.buttonFindClient_KAH.Name = "buttonFindClient_KAH";
-            this.buttonFindClient_KAH.Size = new System.Drawing.Size(75, 51);
-            this.buttonFindClient_KAH.TabIndex = 18;
-            this.buttonFindClient_KAH.UseVisualStyleBackColor = true;
-            this.buttonFindClient_KAH.Click += new System.EventHandler(this.buttonFindClient_KAH_Click);
-            // 
             // dataGridViewOrder_KAH
             // 
             this.dataGridViewOrder_KAH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -392,6 +333,40 @@
             this.groupBoxButton_KAH.TabIndex = 0;
             this.groupBoxButton_KAH.TabStop = false;
             // 
+            // openFileDialogOrder_KAH
+            // 
+            this.openFileDialogOrder_KAH.FileName = "openFileDialog1";
+            // 
+            // buttonCalculateOrder_KAH
+            // 
+            this.buttonCalculateOrder_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.calculator;
+            this.buttonCalculateOrder_KAH.Location = new System.Drawing.Point(196, 166);
+            this.buttonCalculateOrder_KAH.Name = "buttonCalculateOrder_KAH";
+            this.buttonCalculateOrder_KAH.Size = new System.Drawing.Size(345, 56);
+            this.buttonCalculateOrder_KAH.TabIndex = 10;
+            this.buttonCalculateOrder_KAH.UseVisualStyleBackColor = true;
+            this.buttonCalculateOrder_KAH.Click += new System.EventHandler(this.buttonCalculateOrder_KAH_Click);
+            // 
+            // buttonFindProduct_KAH
+            // 
+            this.buttonFindProduct_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.page_white_magnify;
+            this.buttonFindProduct_KAH.Location = new System.Drawing.Point(188, 40);
+            this.buttonFindProduct_KAH.Name = "buttonFindProduct_KAH";
+            this.buttonFindProduct_KAH.Size = new System.Drawing.Size(75, 51);
+            this.buttonFindProduct_KAH.TabIndex = 19;
+            this.buttonFindProduct_KAH.UseVisualStyleBackColor = true;
+            this.buttonFindProduct_KAH.Click += new System.EventHandler(this.buttonFindProduct_KAH_Click);
+            // 
+            // buttonFindClient_KAH
+            // 
+            this.buttonFindClient_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.page_white_magnify;
+            this.buttonFindClient_KAH.Location = new System.Drawing.Point(188, 46);
+            this.buttonFindClient_KAH.Name = "buttonFindClient_KAH";
+            this.buttonFindClient_KAH.Size = new System.Drawing.Size(75, 51);
+            this.buttonFindClient_KAH.TabIndex = 18;
+            this.buttonFindClient_KAH.UseVisualStyleBackColor = true;
+            this.buttonFindClient_KAH.Click += new System.EventHandler(this.buttonFindClient_KAH_Click);
+            // 
             // buttonChart_KAH
             // 
             this.buttonChart_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.chart_bar;
@@ -400,7 +375,7 @@
             this.buttonChart_KAH.Size = new System.Drawing.Size(165, 49);
             this.buttonChart_KAH.TabIndex = 0;
             this.buttonChart_KAH.UseVisualStyleBackColor = true;
-            this.buttonChart_KAH.Click += new System.EventHandler(this.buttonEditClient_KAH_Click);
+            this.buttonChart_KAH.Click += new System.EventHandler(this.buttonChart_KAH_Click);
             // 
             // button1
             // 
@@ -432,9 +407,35 @@
             this.buttonAddClient_KAH.UseVisualStyleBackColor = true;
             this.buttonAddClient_KAH.Click += new System.EventHandler(this.buttonAddClient_KAH_Click);
             // 
-            // openFileDialogOrder_KAH
+            // buttonInfo_KAH
             // 
-            this.openFileDialogOrder_KAH.FileName = "openFileDialog1";
+            this.buttonInfo_KAH.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonInfo_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.help;
+            this.buttonInfo_KAH.Location = new System.Drawing.Point(951, 12);
+            this.buttonInfo_KAH.Name = "buttonInfo_KAH";
+            this.buttonInfo_KAH.Size = new System.Drawing.Size(130, 65);
+            this.buttonInfo_KAH.TabIndex = 0;
+            this.buttonInfo_KAH.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddData_KAH
+            // 
+            this.buttonAddData_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.table_save;
+            this.buttonAddData_KAH.Location = new System.Drawing.Point(170, 12);
+            this.buttonAddData_KAH.Name = "buttonAddData_KAH";
+            this.buttonAddData_KAH.Size = new System.Drawing.Size(130, 65);
+            this.buttonAddData_KAH.TabIndex = 0;
+            this.buttonAddData_KAH.UseVisualStyleBackColor = true;
+            this.buttonAddData_KAH.Click += new System.EventHandler(this.buttonAddData_KAH_Click_1);
+            // 
+            // buttonOpenTable_KAH
+            // 
+            this.buttonOpenTable_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.table_add1;
+            this.buttonOpenTable_KAH.Location = new System.Drawing.Point(12, 12);
+            this.buttonOpenTable_KAH.Name = "buttonOpenTable_KAH";
+            this.buttonOpenTable_KAH.Size = new System.Drawing.Size(130, 65);
+            this.buttonOpenTable_KAH.TabIndex = 0;
+            this.buttonOpenTable_KAH.UseVisualStyleBackColor = true;
+            this.buttonOpenTable_KAH.Click += new System.EventHandler(this.buttonOpenTable_KAH_Click);
             // 
             // FormMain
             // 

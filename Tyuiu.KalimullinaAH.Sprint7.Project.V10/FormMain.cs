@@ -113,13 +113,13 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                             var clientFullName = $"{clientLastName} {clientFirstName} {clientMiddleName}";
                             var clientDiscontTxt = $"{clientDiscont}";
 
-                            // Преобразование строки в кодировку Windows-1251
-                            var encoding = Encoding.GetEncoding("Windows-1251");
+                            var encoding = Encoding.GetEncoding(1251);
                             var clientFullNameRussian = encoding.GetString(encoding.GetBytes(clientFullName));
 
                             textBoxFullName_KAH.Text = clientFullNameRussian;
                             textBoxClientDiscont_KAH.Text = clientDiscontTxt;
-                            return;;
+
+                            return;
                         }
                     }
                 }
@@ -185,6 +185,12 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         {
             FormEditClient edit = new FormEditClient();
             edit.ShowDialog();
+        }
+
+        private void buttonChart_KAH_Click(object sender, EventArgs e)
+        {
+            FormChart chart=   new FormChart();
+            chart.ShowDialog(); 
         }
     }
 }

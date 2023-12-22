@@ -41,8 +41,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib
         {
             string[] data = { dateTime.ToString(), fullName, articul, numberOfMobile, name, price.ToString(), count.ToString(), discount.ToString(), sum.ToString() };
             string csvLine = string.Join(",", data);
-
-            // Сохранение строки в файл CSV
             File.AppendAllText(path, csvLine + Environment.NewLine);
         }
 
