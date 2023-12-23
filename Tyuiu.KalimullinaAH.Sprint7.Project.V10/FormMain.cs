@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib;
 using static Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib.DataService;
 
+
 namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
 {
     public partial class FormMain : Form
@@ -45,10 +46,10 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     dataGridViewOrder_KAH.Columns[0].HeaderText = "Наименование товара";
                     dataGridViewOrder_KAH.Columns[1].HeaderText = "Стоимость";
                     dataGridViewOrder_KAH.Columns[2].HeaderText = "ФИО клиента";
-                    dataGridViewOrder_KAH.Columns[3].HeaderText = "Номер телефона клиента";
-                    dataGridViewOrder_KAH.Columns[4].HeaderText = "Номер телефона клиента";
-                    dataGridViewOrder_KAH.Columns[5].HeaderText = "Кол-во товара";
-                    dataGridViewOrder_KAH.Columns[6].HeaderText = "Дата оформления заказа";
+                    dataGridViewOrder_KAH.Columns[3].HeaderText = "Номер телефона";
+                    dataGridViewOrder_KAH.Columns[4].HeaderText = "Кол-во товара";
+                    dataGridViewOrder_KAH.Columns[5].HeaderText = "Дата оформления заказа";
+                    dataGridViewOrder_KAH.Columns[6].HeaderText = "Сумма товара";
                     dataGridViewOrder_KAH.Columns[7].HeaderText = "Артикул товара";
 
                     for (int i = 0; i < columns; i++)
@@ -72,63 +73,67 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         {
             try
             {
-                string[] row = new string[] { $"{textBoxNameProduct_KAH.Text}", $"{textBoxPrice_KAH.Text}", $"{textBoxFullName_KAH.Text}", $"{textBoxNumberOfMobile_KAH.Text}", $"{numericUpDownCount_KAH.Text}", $"{dateTimePicker_KAH.Text}", $"{textBoxSum_KAH.Text}", $"{textBoxArticul_KAH.Text}" };
-
+                string[] row = new string[] { $"{textBoxNameProduct_KAH.Text}", $"{textBoxPrice_KAH.Text}", $"{textBoxFullName_KAH.Text}", $"{textBoxNumberOfMobile_KAH.Text}", $"{numericUpDownCount_KAH.Text}", $"{dateTimePicker_KAH.Value.ToString("dd.MM.yyyy")}", $"{textBoxSum_KAH.Text}", $"{textBoxArticul_KAH.Text}" };
                 dataGridViewOrder_KAH.Rows.Add(row);
                 bool completed = ds.AddNewData(pathOrders, row);
                 if (completed)
-                { 
+                {
                     MessageBox.Show("Данные добавлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            textBoxNameProduct_KAH.Clear(); 
+            textBoxPrice_KAH.Clear(); 
+            textBoxFullName_KAH.Clear();
+            textBoxNumberOfMobile_KAH.Clear(); 
+            numericUpDownCount_KAH.Value = 0; 
+            dateTimePicker_KAH.Value = DateTime.Now; 
+            textBoxSum_KAH.Clear(); 
+            textBoxArticul_KAH.Clear(); 
         }
+
         private void buttonFindClient_KAH_Click(object sender, EventArgs e)
         {
             string phoneNumber = textBoxNumberOfMobile_KAH.Text;
-
-
-            using (var parser = new TextFieldParser(pathClients))
+            try
             {
-                parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(";");
-                
-
-                while (!parser.EndOfData)
+                using (StreamReader sr = new StreamReader(pathClients, Encoding.GetEncoding(1251))) 
+                using (var parser = new TextFieldParser(sr))
                 {
-                    string[] fields = parser.ReadFields();
-
-                    if (fields.Length >= 4)
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(";");
+                    while (!parser.EndOfData)
                     {
-                        var clientPhoneNumber = fields[4];
-                        var clientLastName = fields[0];
-                        var clientFirstName = fields[1];
-                        var clientMiddleName = fields[2];
-                        var clientDiscont = fields[6];
-
-
-                        if (clientPhoneNumber.Equals(phoneNumber))
+                        string[] fields = parser.ReadFields();
+                        if (fields.Length > 6) 
                         {
-                            var clientFullName = $"{clientLastName} {clientFirstName} {clientMiddleName}";
-                            var clientDiscontTxt = $"{clientDiscont}";
+                            var clientName = fields[0];
+                            var clientSurname = fields[1];
+                            var clientPatronymic = fields[2];
+                            var clientPhoneNumber = fields[4]; 
+                            var clientDiscont = fields[6]; 
 
-                            var encoding = Encoding.GetEncoding(1251);
-                            var clientFullNameRussian = encoding.GetString(encoding.GetBytes(clientFullName));
-
-                            textBoxFullName_KAH.Text = clientFullNameRussian;
-                            textBoxClientDiscont_KAH.Text = clientDiscontTxt;
-
-                            return;
+                            if (clientPhoneNumber.Equals(phoneNumber))
+                            {
+                                var clientFullName = $"{clientName} {clientSurname} {clientPatronymic}";
+                                textBoxFullName_KAH.Text = clientFullName;
+                                textBoxClientDiscont_KAH.Text = clientDiscont;
+                                return;
+                            }
                         }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка при чтении файла: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             MessageBox.Show("Клиент не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-
-
         private void buttonFindProduct_KAH_Click(object sender, EventArgs e)
         {
             string articul = textBoxArticul_KAH.Text;
@@ -164,13 +169,20 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
 
         private void buttonCalculateOrder_KAH_Click(object sender, EventArgs e)
         {
-            decimal productPrice = decimal.Parse(textBoxPrice_KAH.Text);
-            int productCount = (int)numericUpDownCount_KAH.Value;
-            decimal clientDiscount = decimal.Parse(textBoxClientDiscont_KAH.Text);
+            try
+            {
+                decimal productPrice = decimal.Parse(textBoxPrice_KAH.Text);
+                int productCount = (int)numericUpDownCount_KAH.Value;
+                decimal clientDiscount = decimal.Parse(textBoxClientDiscont_KAH.Text);
 
-            decimal orderTotal = ds.CalculateOrderTotal(productPrice, productCount, clientDiscount);
+                decimal orderTotal = ds.CalculateOrderTotal(productPrice, productCount, clientDiscount);
 
-            textBoxSum_KAH.Text = orderTotal.ToString();
+                textBoxSum_KAH.Text = orderTotal.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
     
@@ -191,6 +203,83 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         {
             FormChart chart=   new FormChart();
             chart.ShowDialog(); 
+        }
+
+        private void buttonManual_KAH_Click(object sender, EventArgs e)
+        {
+            FormManual manual = new FormManual();
+            manual.ShowDialog();
+        }
+
+        private void buttonInfo_KAH_Click(object sender, EventArgs e)
+        {
+            FormAbout about= new FormAbout();
+            about.ShowDialog();
+        }
+
+        private void buttonOpenTable_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Открыть файл";
+
+        }
+
+        private void buttonAddData_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle= "Сохранить в файл";
+        }
+
+        private void buttonInfo_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Справка";
+        }
+
+        private void buttonManual_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Справка";
+
+        }
+
+        private void buttonAddClient_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Добавить";
+
+        }
+
+        private void buttonEditClient_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Редактировать";
+
+        }
+
+        private void buttonChart_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Открыть";
+
+        }
+
+      
+
+        private void buttonCalculateOrder_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Рассчитать";
+
+        }
+
+        private void buttonFindClient_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Поиск";
+
+        }
+
+        private void buttonFindProduct_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipOrder_KAH.ToolTipTitle = "Поиск";
+
+        }
+
+        private void textBoxSum_KAH_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

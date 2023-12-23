@@ -16,5 +16,11 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         {
             InitializeComponent();
         }
+
+        private void buttonOk_KAH_Click(object sender, EventArgs e)
+        {
+            this.Close();
+
+        }
     }
 }

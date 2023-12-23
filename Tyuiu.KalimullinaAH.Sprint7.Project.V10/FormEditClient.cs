@@ -22,46 +22,8 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         }
         DataService ds = new DataService();
         string pathClients = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Clients.csv";
-    
-       //редактирование  
-        private void LoadDataFromCsv()
-        {
-            List<Client> clients = new List<Client>();
 
-            using (var reader = new StreamReader(pathClients))
-            {
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var data = line.Split(';');
-
-                    Client client = new Client
-                    {
-                        FirstName = data[0],
-                        LastName = data[1],
-                        MiddleName = data[2],
-                        Birthdate = DateTime.Parse(data[3]),
-                        PhoneNumber = data[4],
-                        Address = data[5],
-                        Discount = int.Parse(data[6]),                   
-                        
-                    };
-                    clients.Add(client);
-
-
-
-                }
-            }
-
-            dataGridViewClient_KAH.DataSource = clients;
-        }
-
-
-
-        private void buttonSave_KAH_Click(object sender, EventArgs e)
-        {
-          
-        }
+        //редактирование  
 
         private void buttonOpenFile_KAH_Click(object sender, EventArgs e)
         {
@@ -78,6 +40,14 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
 
                     dataGridViewClient_KAH.RowCount = rows + 1;
                     dataGridViewClient_KAH.ColumnCount = columns;
+
+                    dataGridViewClient_KAH.Columns[1].HeaderText = "Имя";
+                    dataGridViewClient_KAH.Columns[0].HeaderText = "Фамилия";
+                    dataGridViewClient_KAH.Columns[2].HeaderText = "Отчество";
+                    dataGridViewClient_KAH.Columns[3].HeaderText = "Дата рождения";
+                    dataGridViewClient_KAH.Columns[4].HeaderText = "Номер телефона ";
+                    dataGridViewClient_KAH.Columns[5].HeaderText = "Адрес";
+                    dataGridViewClient_KAH.Columns[6].HeaderText = "Персональная скидка";
                     for (int i = 0; i < columns; i++)
                     {
                         dataGridViewClient_KAH.Columns[i].Width = 200;
@@ -102,9 +72,93 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             }
         }
 
-       
-      
+        private void buttonOpenFile_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip_KAH.ToolTipTitle = "Открыть файл";
+
+        }
+
+        private void buttonAdd_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip_KAH.ToolTipTitle = "Сохранить в файл";
+        }
+
+        private void buttonAdd_KAH_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                // Получаем текущие данные из файла
+                var currentData = ds.GetData(pathClients);
+
+                // Создаём временный список для новых данных
+                var updatedData = new List<string[]>();
+
+                // Цикл по строкам DataGridView
+                foreach (DataGridViewRow row in dataGridViewClient_KAH.Rows)
+                {
+                    // Предполагаем, что количество элементов в row соответствует текущим данным
+                    if (!row.IsNewRow)
+                    {
+                        var rowArray = new string[row.Cells.Count];
+                        for (int i = 0; i < row.Cells.Count; ++i)
+                        {
+                            rowArray[i] = Convert.ToString(row.Cells[i].Value);
+                        }
+                        // Добавляем строки к обновлённым данным
+                        updatedData.Add(rowArray);
+                    }
+                }
+
+                // Сохраняем новые данные в файл
+                foreach (var line in updatedData)
+                {
+                    // Используем метод AddNewData для добавления новых данных в файл
+                    if (!ds.AddNewData(pathClients, line))
+                    {
+                        throw new Exception("Не удалось сохранить строку данных.");
+                    }
+                }
+
+                MessageBox.Show("Изменения успешно сохранены.", "Сохранение выполнено", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonSearch_KAH_Click(object sender, EventArgs e)
+        {
+            string searchText = textBoxSearch_KAH.Text;
+
+            // Очищаем выделение в DataGrid
+            dataGridViewClient_KAH.ClearSelection();
+
+            // Проходим по всем строкам в DataGrid
+            foreach (DataGridViewRow row in dataGridViewClient_KAH.Rows)
+            {
+                bool rowContainsSearchText = false;
+
+                // Проверяем каждую ячейку в строке на наличие искомого текста
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell.Value != null && cell.Value.ToString().Contains(searchText))
+                    {
+                        rowContainsSearchText = true;
+                        break;
+                    }
+                }
+
+                // Если искомый текст найден в строке, выделяем строку
+                if (rowContainsSearchText)
+                {
+                    row.Selected = true;
+                }
+            }
+        }
+
     }
-    
 }
-   
+
+

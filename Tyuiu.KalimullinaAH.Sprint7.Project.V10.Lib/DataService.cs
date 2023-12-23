@@ -35,15 +35,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib
             return arrayValues;
         }
 
-    
-
-    public void SaveDataToCSV(DateTime dateTime, string fullName, string articul, string numberOfMobile,string name, decimal price, int count, decimal discount, decimal sum,string path)
-        {
-            string[] data = { dateTime.ToString(), fullName, articul, numberOfMobile, name, price.ToString(), count.ToString(), discount.ToString(), sum.ToString() };
-            string csvLine = string.Join(",", data);
-            File.AppendAllText(path, csvLine + Environment.NewLine);
-        }
-
 
         public bool AddNewData(string path, string[] line)
         {
@@ -71,8 +62,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib
         {
             decimal orderTotal = (productPrice * productCount) * (1 - (clientDiscount / 100));
 
-
-
             return orderTotal;
         
         }
@@ -88,16 +77,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib
 
         }
 
-        public class ClientMap : ClassMap<Client>
-        {
-            public ClientMap()
-            {
-                Map(m => m.LastName).Index(0);
-                Map(m => m.FirstName).Index(1);
-                Map(m => m.MiddleName).Index(2);
-                Map(m => m.Birthdate).Index(3).TypeConverterOption.Format("dd.MM.yyyy");
-                Map(m => m.PhoneNumber).Index(4);
-            }
+
         }
     }
-}
+

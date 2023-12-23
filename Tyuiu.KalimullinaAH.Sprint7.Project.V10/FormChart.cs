@@ -12,6 +12,8 @@ using System.IO;
 using static System.Windows.Forms.LinkLabel;
 using DocumentFormat.OpenXml.ExtendedProperties;
 using System.Globalization;
+using DocumentFormat.OpenXml.Spreadsheet;
+using CsvHelper;
 
 namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
 {
@@ -21,15 +23,14 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         {
             InitializeComponent();
         }
-
         string filePath = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Orders.csv";
 
-        private void buttonChartMounth_KAH_Click(object sender, EventArgs e)
+        private void buttonOrdersOfAllMonth_KAH_Click(object sender, EventArgs e)
         {
-            // Создаем список для хранения данных о заказах  
+            // Создаем список для хранения данных о заказах
             List<string[]> ordersData = new List<string[]>();
 
-            // Читаем данные из файла  
+            // Читаем данные из файла
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
@@ -40,85 +41,23 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 }
             }
 
-            // Получаем месяцы из столбца 7 и подсчитываем количество заказов и купленных товаров в каждом месяце  
+            // Получаем месяцы из столбца 7 и подсчитываем количество заказов и купленных товаров в каждом месяце
             var ordersByMonth = ordersData
-                .Skip(1) // Пропускаем заголовок  
-                .Select(row => new { Month = DateTime.Parse(row[7]).Month, ProductCount = int.Parse(row[6]) })
+                .Skip(1) // Пропускаем заголовок
+                .Select(row => new { Month = DateTime.Parse(row[5]).Month, ProductCount = int.Parse(row[4]) })
                 .GroupBy(order => order.Month)
                 .Select(group => new { Month = group.Key, OrderCount = group.Count(), ProductCount = group.Sum(order => order.ProductCount) })
                 .OrderBy(order => order.Month)
                 .ToList();
 
-            // Устанавливаем палитру  
-            chartOrder_KAH.Palette = ChartColorPalette.SeaGreen;
+            // Устанавливаем палитру
+            chartOrder_KAH.Palette = ChartColorPalette.Excel;
 
-            // Заголовок графика  
-            chartOrder_KAH.Titles.Add("Заказы по месяцам");
-
-            // Названия месяцев 
+            // Заголовок графика
+            chartOrder_KAH.ChartAreas[0].AxisY.Title = "Кол-во в месяц";
+            // Названия месяцев
             string[] legendNames = new string[]
             {
-        "", // Используем пустую строку для пропуска индекса 0 
-        "Январь",
-        "Февраль",
-        "Март",
-        "Апрель",
-        "Май",
-        "Июнь",
-        "Июль",
-        "Август",
-        "Сентябрь",
-        "Октябрь",
-        "Ноябрь",
-        "Декабрь"
-            };
-
-            // Добавляем последовательность  
-            for (int i = 0; i < ordersByMonth.Count; i++)
-            {
-                Series series = chartOrder_KAH.Series.Add(legendNames[ordersByMonth[i].Month]);
-                series.Points.AddXY("Заказы", ordersByMonth[i].OrderCount);
-                series.Points.AddXY("Товары", ordersByMonth[i].ProductCount);
-            }
-        }
-
-
-        private void checkBoxMonth_KAH_CheckedChanged(object sender, EventArgs e)
-        {
-            // Проверяем состояние чекбокса
-            if (checkBoxMonth_KAH.Checked)
-            {
-                // Создаем список для хранения данных о заказах
-                List<string[]> ordersData = new List<string[]>();
-
-                // Читаем данные из файла
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        string[] row = line.Split(';');
-                        ordersData.Add(row);
-                    }
-                }
-
-                // Получаем месяцы из столбца 7 и подсчитываем количество заказов и купленных товаров в каждом месяце
-                var ordersByMonth = ordersData
-                    .Skip(1) // Пропускаем заголовок
-                    .Select(row => new { Month = DateTime.Parse(row[7]).Month, ProductCount = int.Parse(row[6]) })
-                    .GroupBy(order => order.Month)
-                    .Select(group => new { Month = group.Key, OrderCount = group.Count(), ProductCount = group.Sum(order => order.ProductCount) })
-                    .OrderBy(order => order.Month)
-                    .ToList();
-
-                // Устанавливаем палитру
-                chartOrder_KAH.Palette = ChartColorPalette.SeaGreen;
-
-                // Заголовок графика
-                chartOrder_KAH.ChartAreas[0].AxisY.Title = "Кол-во в месяц";
-                // Названия месяцев
-                string[] legendNames = new string[]
-                {
             "", // Используем пустую строку для пропуска индекса 0
             "Январь",
             "Февраль",
@@ -132,75 +71,128 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             "Октябрь",
             "Ноябрь",
             "Декабрь"
-                };
+            };
 
-                // Очищаем график перед добавлением новых данных
-                chartOrder_KAH.Series.Clear();
+            // Очищаем график перед добавлением новых данных
+            chartOrder_KAH.Series.Clear();
 
-                // Добавляем последовательность
-                for (int i = 0; i < ordersByMonth.Count; i++)
-                {
-                    Series series = chartOrder_KAH.Series.Add(legendNames[ordersByMonth[i].Month]);
-                    series.Points.AddXY("Заказы",  ordersByMonth[i].OrderCount);
-                }
-            }
-            else
+            // Добавляем последовательность
+            for (int i = 0; i < ordersByMonth.Count; i++)
             {
-                // Очищаем график, если чекбокс не выбран
-                chartOrder_KAH.Series.Clear();
+                Series series = chartOrder_KAH.Series.Add(legendNames[ordersByMonth[i].Month]);
+                series.Points.AddXY("Заказы", ordersByMonth[i].OrderCount);
             }
-        }
 
-        private void checkBoxProducts_KAH_CheckedChanged(object sender, EventArgs e)
+
+            // Очищаем график, если чекбокс не выбран
+            // chartOrder_KAH.Series.Clear();
+        }
+        private void Form1_Load(object sender, EventArgs e)
         {
-            // Проверяем состояние чекбокса
-            if (checkBoxProducts_KAH.Checked)
-            {
-                // Создаем список для хранения данных о товарах
-                List<string[]> productsData = new List<string[]>();
-
-                // Читаем данные из файла с правильной кодировкой
-                using (StreamReader reader = new StreamReader(filePath))
-                {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        string[] row = line.Split(';');
-                        productsData.Add(row);
-                    }
-                }
-
-                // Получаем названия товаров и подсчитываем количество заказов, в которых они были куплены
-                var productsCount = productsData
-                    .Skip(1) // Пропускаем заголовок
-                    .GroupBy(product => product[0])
-                    .Select(group => new { ProductName = group.Key, OrderCount = group.Count() })
-                    .OrderByDescending(product => product.OrderCount)
-                    .ToList();
-
-                // Устанавливаем палитру
-                chartOrder_KAH.Palette = ChartColorPalette.SeaGreen;
-
-
-                // Очищаем график перед добавлением новых данных
-                chartOrder_KAH.Series.Clear();
-
-                // Добавляем последовательность
-                for (int i = 0; i < productsCount.Count; i++)
-                {
-                    Series series = chartOrder_KAH.Series.Add(productsCount[i].ProductName);
-                    series.Points.AddXY("Заказы", productsCount[i].OrderCount);
-                }
-            }
-            else
-            {
-                // Очищаем график, если чекбокс не выбран
-                chartOrder_KAH.Series.Clear();
-            }
-
-
+            comboBoxMonths_KAH.Items.AddRange(new object[] {
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь"
+    });
         }
+
+        private void buttonOrdersOfMonth_KAH_Click(object sender, EventArgs e)
+        {
+            // Получаем выбранный месяц
+            int monthIndex = comboBoxMonths_KAH.SelectedIndex + 1; // ComboBox индексы начинаются с 0
+
+            // Проверяем, что месяц был выбран
+            if (monthIndex < 1 || monthIndex > 12)
+            {
+                MessageBox.Show("Выберите месяц");
+                return;
+            }
+
+            // Создаем список для хранения данных о заказах
+            List<string[]> ordersData = new List<string[]>();
+
+            // Читаем данные из файла
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] row = line.Split(';');
+                    ordersData.Add(row);
+                }
+            }
+
+            // Отфильтровываем данные за выбранный месяц
+            var ordersByDay = ordersData
+                .Skip(1) // Пропускаем заголовок
+                .Select(row => new { Date = DateTime.Parse(row[5]), ProductCount = int.Parse(row[4]) })
+                .Where(order => order.Date.Month == monthIndex)
+                .GroupBy(order => order.Date.Day)
+                .Select(group => new { Day = group.Key, OrderCount = group.Count(), ProductCount = group.Sum(order => order.ProductCount) })
+                .OrderBy(order => order.Day)
+                .ToList();
+
+            // Задаем тип графика - сплайн
+            Series series = new Series
+            {
+                Name = "Orders",
+                ChartType = SeriesChartType.Spline,
+                XValueType = ChartValueType.Int32
+            };
+
+            // Очищаем старые данные с графика
+            chartOrder_KAH.Series.Clear();
+
+            // Добавляем данные в серию
+            foreach (var order in ordersByDay)
+            {
+                series.Points.AddXY(order.Day, order.OrderCount);
+            }
+
+            // Добавляем серию в график
+            chartOrder_KAH.Series.Add(series);
+
+            // Обновляем легенду
+            chartOrder_KAH.Legends.Clear();
+            chartOrder_KAH.Legends.Add(new Legend("Months") { DockedToChartArea = "ChartArea1" });
+
+            // Настройка осей графика
+            chartOrder_KAH.ChartAreas[0].AxisX.Title = "День";
+            chartOrder_KAH.ChartAreas[0].AxisX.Interval = 1; // Устанавливаем интервал в 1 день
+            chartOrder_KAH.ChartAreas[0].AxisY.Title = "Заказы";
+        }
+
+        private void comboBoxMonths_KAH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            comboBoxMonths_KAH.Items.AddRange(new object[] {
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь"
+        });
     }
 
-     
+    }
 }
+
+
+
+
+

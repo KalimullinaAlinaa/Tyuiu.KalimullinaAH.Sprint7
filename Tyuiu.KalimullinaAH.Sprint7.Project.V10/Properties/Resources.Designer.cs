@@ -103,6 +103,26 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap photo_5449884010940583175_y {
+            get {
+                object obj = ResourceManager.GetObject("photo_5449884010940583175_y", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap report_magnify {
+            get {
+                object obj = ResourceManager.GetObject("report_magnify", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap table_add {
             get {
                 object obj = ResourceManager.GetObject("table_add", resourceCulture);

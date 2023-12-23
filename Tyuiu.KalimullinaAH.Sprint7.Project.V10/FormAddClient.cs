@@ -90,8 +90,17 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void buttonSave_KAH_Click(object sender, EventArgs e)
+       
+
+        private void buttonOpenFile_KAH_MouseEnter(object sender, EventArgs e)
         {
+            toolTip_KAH.ToolTipTitle = "Открыть файл";
+
+        }
+
+        private void buttonAdd_KAH_MouseEnter(object sender, EventArgs e)
+        {
+            toolTip_KAH.ToolTipTitle = "Сохранить в файл";
 
         }
     }
