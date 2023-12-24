@@ -21,7 +21,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         DataService ds = new DataService();
 
 
-        string pathClients = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Clients.csv";
+        string pathClients = @"C:\Users\boulevarovaalina\source\repos\Tyuiu.KalimullinaAH.Sprint7\Заказы\Clients.csv";
 
 
 

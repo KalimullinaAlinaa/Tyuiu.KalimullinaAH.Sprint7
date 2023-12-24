@@ -24,7 +24,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             InitializeComponent();
             this.Load += new System.EventHandler(this.Form_Load);
         }
-        string filePath = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Orders.csv";
+        string filePath = @"C:\Users\boulevarovaalina\source\repos\Tyuiu.KalimullinaAH.Sprint7\Заказы\Orders .csv";
 
         private void buttonOrdersOfAllMonth_KAH_Click(object sender, EventArgs e)
         {
@@ -88,7 +88,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             "Май", "Июнь", "Июль", "Август",
             "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
             };
-            comboBoxMonths_KAH.BringToFront(); // Убедитесь, что comboBox отображается поверх других элементов управления.
+            comboBoxMonths_KAH.BringToFront(); 
         }
 
 
@@ -122,7 +122,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     }
                 }
 
-                // Фильтрация списка заказов по выбранному месяцу и агрегация данных
                 var ordersByDay = ordersData
                     .Where(row => DateTime.TryParseExact(row[5], "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime parsedDate) && parsedDate.Month == monthIndex)
                     .GroupBy(row => DateTime.ParseExact(row[5], "dd.MM.yyyy", null).Day)
@@ -134,10 +133,9 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 {
                     MessageBox.Show("Данных за выбранный месяц нет", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); 
 
-                    return; // Выход из метода, если данных нет
+                    return; 
                 }
 
-                // Создание и заполнение серии данных для графика
                 chartOrder_KAH.Series.Clear();
                 Series series = chartOrder_KAH.Series.Add("Заказы");
                 series.ChartType = SeriesChartType.Column;
@@ -147,7 +145,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     series.Points.AddXY(day.Day, day.OrderCount);
                 }
 
-                // Стилизация графика
                 chartOrder_KAH.ChartAreas[0].AxisX.Interval = 1;
                 chartOrder_KAH.ChartAreas[0].AxisX.Title = "День";
                 chartOrder_KAH.ChartAreas[0].AxisY.Title = "Количество в день";
@@ -168,7 +165,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 return;
             }
 
-            // Словарь, где ключом будет являться название товара, а значением - общее количество заказов.
             Dictionary<string, int> productOrders = new Dictionary<string, int>();
 
             try
@@ -202,7 +198,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     return;
                 }
 
-                // Готовим данные для круговой диаграммы.
                 chartOrder_KAH.Series.Clear();
                 Series series = chartOrder_KAH.Series.Add("Товары");
                 series.ChartType = SeriesChartType.Pie;
@@ -212,7 +207,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     series.Points.AddXY(productOrder.Key, productOrder.Value);
                 }
 
-                // Стилизация диаграммы
                 chartOrder_KAH.ChartAreas[0].AxisX.Interval = 1;
                 chartOrder_KAH.ChartAreas[0].AxisX.Title = "Название товара";
                 chartOrder_KAH.ChartAreas[0].AxisY.Title = "Количество заказов";

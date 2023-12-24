@@ -25,8 +25,8 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         }
        
         DataService ds = new DataService(); 
-        string pathClients = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Clients.csv";
-        string pathOrders = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Orders.csv";
+        string pathClients = $@"{Directory.GetCurrentDirectory()}\Clients.csv";
+        string pathOrders = $@"{Directory.GetCurrentDirectory()}\Orders .csv";
 
         private void buttonOpenTable_KAH_Click(object sender, EventArgs e)
         {

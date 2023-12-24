@@ -177,6 +177,7 @@
             this.groupBoxOrders_KAH.Controls.Add(this.textBoxFullName_KAH);
             this.groupBoxOrders_KAH.Controls.Add(this.labelDiscont_KAH);
             this.groupBoxOrders_KAH.Controls.Add(this.labelFullName_KAH);
+            this.groupBoxOrders_KAH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBoxOrders_KAH.Location = new System.Drawing.Point(297, 21);
             this.groupBoxOrders_KAH.Name = "groupBoxOrders_KAH";
             this.groupBoxOrders_KAH.Size = new System.Drawing.Size(557, 255);
@@ -209,10 +210,10 @@
             // textBoxNameProduct_KAH
             // 
             this.textBoxNameProduct_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxNameProduct_KAH.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxNameProduct_KAH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxNameProduct_KAH.Location = new System.Drawing.Point(13, 54);
             this.textBoxNameProduct_KAH.Name = "textBoxNameProduct_KAH";
-            this.textBoxNameProduct_KAH.Size = new System.Drawing.Size(155, 25);
+            this.textBoxNameProduct_KAH.Size = new System.Drawing.Size(155, 27);
             this.textBoxNameProduct_KAH.TabIndex = 3;
             // 
             // labelSum_KAH
@@ -238,10 +239,10 @@
             // textBoxSum_KAH
             // 
             this.textBoxSum_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxSum_KAH.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxSum_KAH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxSum_KAH.Location = new System.Drawing.Point(11, 209);
             this.textBoxSum_KAH.Name = "textBoxSum_KAH";
-            this.textBoxSum_KAH.Size = new System.Drawing.Size(155, 25);
+            this.textBoxSum_KAH.Size = new System.Drawing.Size(155, 27);
             this.textBoxSum_KAH.TabIndex = 9;
             this.textBoxSum_KAH.TextChanged += new System.EventHandler(this.textBoxSum_KAH_TextChanged);
             // 
@@ -278,10 +279,10 @@
             // textBoxPrice_KAH
             // 
             this.textBoxPrice_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxPrice_KAH.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxPrice_KAH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxPrice_KAH.Location = new System.Drawing.Point(367, 129);
             this.textBoxPrice_KAH.Name = "textBoxPrice_KAH";
-            this.textBoxPrice_KAH.Size = new System.Drawing.Size(155, 25);
+            this.textBoxPrice_KAH.Size = new System.Drawing.Size(155, 27);
             this.textBoxPrice_KAH.TabIndex = 8;
             // 
             // numericUpDownCount_KAH
@@ -296,19 +297,19 @@
             // textBoxClientDiscont_KAH
             // 
             this.textBoxClientDiscont_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxClientDiscont_KAH.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxClientDiscont_KAH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxClientDiscont_KAH.Location = new System.Drawing.Point(192, 129);
             this.textBoxClientDiscont_KAH.Name = "textBoxClientDiscont_KAH";
-            this.textBoxClientDiscont_KAH.Size = new System.Drawing.Size(155, 25);
+            this.textBoxClientDiscont_KAH.Size = new System.Drawing.Size(155, 27);
             this.textBoxClientDiscont_KAH.TabIndex = 7;
             // 
             // textBoxFullName_KAH
             // 
             this.textBoxFullName_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.textBoxFullName_KAH.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxFullName_KAH.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxFullName_KAH.Location = new System.Drawing.Point(11, 129);
             this.textBoxFullName_KAH.Name = "textBoxFullName_KAH";
-            this.textBoxFullName_KAH.Size = new System.Drawing.Size(155, 25);
+            this.textBoxFullName_KAH.Size = new System.Drawing.Size(155, 27);
             this.textBoxFullName_KAH.TabIndex = 6;
             // 
             // labelDiscont_KAH

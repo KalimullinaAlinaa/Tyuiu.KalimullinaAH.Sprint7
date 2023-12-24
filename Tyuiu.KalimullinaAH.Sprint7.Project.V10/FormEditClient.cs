@@ -22,7 +22,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             InitializeComponent();
         }
         DataService ds = new DataService();
-        string pathClients = @"C:\Users\boulevarovaalina\Desktop\Новая папка\Clients.csv";
+        string pathClients = @"C:\Users\boulevarovaalina\source\repos\Tyuiu.KalimullinaAH.Sprint7\Заказы\Clients.csv";
 
         //редактирование  
 
@@ -132,7 +132,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         {
             string searchText = textBoxSearch_KAH.Text;
             dataGridViewClient_KAH.ClearSelection();
-            bool dataFound = false; // Variable to track if data is found
+            bool dataFound = false; 
 
             foreach (DataGridViewRow row in dataGridViewClient_KAH.Rows)
             {
