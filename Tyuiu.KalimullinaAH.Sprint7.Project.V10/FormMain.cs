@@ -67,7 +67,11 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                 else { throw new Exception("Файл не выбран!"); }
             }
             catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+
+
             }
+            buttonAddData_KAH.Enabled = true;
+
         }
         private void buttonAddData_KAH_Click_1(object sender, EventArgs e)
         {
@@ -85,10 +89,11 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             textBoxNameProduct_KAH.Clear(); 
             textBoxPrice_KAH.Clear(); 
             textBoxFullName_KAH.Clear();
-            textBoxNumberOfMobile_KAH.Clear(); 
+            textBoxClientDiscont_KAH .Clear(); 
             numericUpDownCount_KAH.Value = 0; 
             dateTimePicker_KAH.Value = DateTime.Now; 
             textBoxSum_KAH.Clear(); 

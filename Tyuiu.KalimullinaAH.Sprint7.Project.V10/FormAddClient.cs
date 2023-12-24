@@ -72,6 +72,9 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+           
+            buttonAdd_KAH.Enabled = true;
+
         }
 
         private void buttonAdd_KAH_Click(object sender, EventArgs e)
@@ -87,7 +90,16 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     MessageBox.Show("Данные добавлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex) { MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            
+            }
+            textBoxSname_KAH.Clear();
+            textBoxName_KAH.Clear();
+            textBoxPname_KAH.Clear();
+            numericUpDownDiscont_KAH.Value = 0;
+            dateTimePicker_KAH.Value = DateTime.Now;
+            textBoxPhone_KAH.Clear();
+            textBoxAdress_KAH.Clear();
         }
 
        

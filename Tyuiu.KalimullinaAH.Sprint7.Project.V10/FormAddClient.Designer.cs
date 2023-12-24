@@ -30,7 +30,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelButton_KAH = new System.Windows.Forms.Panel();
             this.buttonOpenFile_KAH = new System.Windows.Forms.Button();
             this.buttonAdd_KAH = new System.Windows.Forms.Button();
             this.panelAddInfo_KAH = new System.Windows.Forms.Panel();
@@ -49,13 +49,12 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.labelPatronymic_KAH = new System.Windows.Forms.Label();
             this.textBoxName_KAH = new System.Windows.Forms.TextBox();
             this.textBoxSname_KAH = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.openFileDialogTask_KAH = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogTask_KAH = new System.Windows.Forms.SaveFileDialog();
             this.toolTip_KAH = new System.Windows.Forms.ToolTip(this.components);
             this.dataGridViewClient_KAH = new System.Windows.Forms.DataGridView();
             this.panelDataGrid_KAH = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.panelButton_KAH.SuspendLayout();
             this.panelAddInfo_KAH.SuspendLayout();
             this.groupBoxAdd_KAH.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDiscont_KAH)).BeginInit();
@@ -63,19 +62,20 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.panelDataGrid_KAH.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // panelButton_KAH
             // 
-            this.panel1.Controls.Add(this.buttonOpenFile_KAH);
-            this.panel1.Controls.Add(this.buttonAdd_KAH);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(767, 91);
-            this.panel1.TabIndex = 0;
+            this.panelButton_KAH.Controls.Add(this.buttonOpenFile_KAH);
+            this.panelButton_KAH.Controls.Add(this.buttonAdd_KAH);
+            this.panelButton_KAH.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelButton_KAH.Location = new System.Drawing.Point(0, 0);
+            this.panelButton_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelButton_KAH.Name = "panelButton_KAH";
+            this.panelButton_KAH.Size = new System.Drawing.Size(795, 91);
+            this.panelButton_KAH.TabIndex = 0;
             // 
             // buttonOpenFile_KAH
             // 
+            this.buttonOpenFile_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonOpenFile_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.table_add;
             this.buttonOpenFile_KAH.Location = new System.Drawing.Point(9, 13);
             this.buttonOpenFile_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -89,6 +89,10 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             // 
             // buttonAdd_KAH
             // 
+            this.buttonAdd_KAH.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAdd_KAH.Enabled = false;
+            this.buttonAdd_KAH.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAdd_KAH.ForeColor = System.Drawing.Color.Silver;
             this.buttonAdd_KAH.Image = global::Tyuiu.KalimullinaAH.Sprint7.Project.V10.Properties.Resources.table_save;
             this.buttonAdd_KAH.Location = new System.Drawing.Point(168, 14);
             this.buttonAdd_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -107,13 +111,12 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.panelAddInfo_KAH.Location = new System.Drawing.Point(0, 436);
             this.panelAddInfo_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelAddInfo_KAH.Name = "panelAddInfo_KAH";
-            this.panelAddInfo_KAH.Size = new System.Drawing.Size(767, 207);
+            this.panelAddInfo_KAH.Size = new System.Drawing.Size(795, 207);
             this.panelAddInfo_KAH.TabIndex = 1;
             // 
             // groupBoxAdd_KAH
             // 
             this.groupBoxAdd_KAH.Controls.Add(this.numericUpDownDiscont_KAH);
-            this.groupBoxAdd_KAH.Controls.Add(this.label1);
             this.groupBoxAdd_KAH.Controls.Add(this.labelDiscont_KAH);
             this.groupBoxAdd_KAH.Controls.Add(this.dateTimePicker_KAH);
             this.groupBoxAdd_KAH.Controls.Add(this.textBoxAdress_KAH);
@@ -132,27 +135,27 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.groupBoxAdd_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBoxAdd_KAH.Name = "groupBoxAdd_KAH";
             this.groupBoxAdd_KAH.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBoxAdd_KAH.Size = new System.Drawing.Size(767, 207);
+            this.groupBoxAdd_KAH.Size = new System.Drawing.Size(795, 207);
             this.groupBoxAdd_KAH.TabIndex = 3;
             this.groupBoxAdd_KAH.TabStop = false;
             this.groupBoxAdd_KAH.Text = "Добавить  нового клиента:";
             // 
             // numericUpDownDiscont_KAH
             // 
-            this.numericUpDownDiscont_KAH.Location = new System.Drawing.Point(510, 72);
+            this.numericUpDownDiscont_KAH.Location = new System.Drawing.Point(525, 72);
             this.numericUpDownDiscont_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.numericUpDownDiscont_KAH.Name = "numericUpDownDiscont_KAH";
-            this.numericUpDownDiscont_KAH.Size = new System.Drawing.Size(141, 27);
-            this.numericUpDownDiscont_KAH.TabIndex = 5;
+            this.numericUpDownDiscont_KAH.Size = new System.Drawing.Size(53, 27);
+            this.numericUpDownDiscont_KAH.TabIndex = 4;
             // 
             // labelDiscont_KAH
             // 
             this.labelDiscont_KAH.AutoSize = true;
-            this.labelDiscont_KAH.Location = new System.Drawing.Point(506, 32);
+            this.labelDiscont_KAH.Location = new System.Drawing.Point(521, 32);
             this.labelDiscont_KAH.Name = "labelDiscont_KAH";
-            this.labelDiscont_KAH.Size = new System.Drawing.Size(116, 20);
+            this.labelDiscont_KAH.Size = new System.Drawing.Size(119, 20);
             this.labelDiscont_KAH.TabIndex = 4;
-            this.labelDiscont_KAH.Text = "Скидка клиента";
+            this.labelDiscont_KAH.Text = "Скидка клиента:";
             // 
             // dateTimePicker_KAH
             // 
@@ -160,23 +163,23 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.dateTimePicker_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dateTimePicker_KAH.Name = "dateTimePicker_KAH";
             this.dateTimePicker_KAH.Size = new System.Drawing.Size(156, 27);
-            this.dateTimePicker_KAH.TabIndex = 1;
+            this.dateTimePicker_KAH.TabIndex = 5;
             // 
             // textBoxAdress_KAH
             // 
-            this.textBoxAdress_KAH.Location = new System.Drawing.Point(352, 167);
+            this.textBoxAdress_KAH.Location = new System.Drawing.Point(348, 167);
             this.textBoxAdress_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxAdress_KAH.Name = "textBoxAdress_KAH";
-            this.textBoxAdress_KAH.Size = new System.Drawing.Size(141, 27);
-            this.textBoxAdress_KAH.TabIndex = 1;
+            this.textBoxAdress_KAH.Size = new System.Drawing.Size(156, 27);
+            this.textBoxAdress_KAH.TabIndex = 6;
             // 
             // textBoxPhone_KAH
             // 
             this.textBoxPhone_KAH.Location = new System.Drawing.Point(186, 167);
             this.textBoxPhone_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPhone_KAH.Name = "textBoxPhone_KAH";
-            this.textBoxPhone_KAH.Size = new System.Drawing.Size(141, 27);
-            this.textBoxPhone_KAH.TabIndex = 1;
+            this.textBoxPhone_KAH.Size = new System.Drawing.Size(156, 27);
+            this.textBoxPhone_KAH.TabIndex = 5;
             // 
             // labelBirthDay_KAH
             // 
@@ -219,8 +222,8 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.textBoxPname_KAH.Location = new System.Drawing.Point(352, 72);
             this.textBoxPname_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPname_KAH.Name = "textBoxPname_KAH";
-            this.textBoxPname_KAH.Size = new System.Drawing.Size(141, 27);
-            this.textBoxPname_KAH.TabIndex = 1;
+            this.textBoxPname_KAH.Size = new System.Drawing.Size(156, 27);
+            this.textBoxPname_KAH.TabIndex = 3;
             // 
             // labelNumberOfPhone
             // 
@@ -245,24 +248,16 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.textBoxName_KAH.Location = new System.Drawing.Point(186, 72);
             this.textBoxName_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxName_KAH.Name = "textBoxName_KAH";
-            this.textBoxName_KAH.Size = new System.Drawing.Size(142, 27);
-            this.textBoxName_KAH.TabIndex = 1;
+            this.textBoxName_KAH.Size = new System.Drawing.Size(156, 27);
+            this.textBoxName_KAH.TabIndex = 2;
             // 
             // textBoxSname_KAH
             // 
             this.textBoxSname_KAH.Location = new System.Drawing.Point(13, 72);
             this.textBoxSname_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxSname_KAH.Name = "textBoxSname_KAH";
-            this.textBoxSname_KAH.Size = new System.Drawing.Size(153, 27);
+            this.textBoxSname_KAH.Size = new System.Drawing.Size(156, 27);
             this.textBoxSname_KAH.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(580, 159);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 20);
-            this.label1.TabIndex = 0;
             // 
             // openFileDialogTask_KAH
             // 
@@ -281,7 +276,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.dataGridViewClient_KAH.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridViewClient_KAH.Name = "dataGridViewClient_KAH";
             this.dataGridViewClient_KAH.RowHeadersWidth = 51;
-            this.dataGridViewClient_KAH.Size = new System.Drawing.Size(767, 345);
+            this.dataGridViewClient_KAH.Size = new System.Drawing.Size(795, 345);
             this.dataGridViewClient_KAH.TabIndex = 9;
             // 
             // panelDataGrid_KAH
@@ -291,24 +286,25 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             this.panelDataGrid_KAH.Location = new System.Drawing.Point(0, 91);
             this.panelDataGrid_KAH.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panelDataGrid_KAH.Name = "panelDataGrid_KAH";
-            this.panelDataGrid_KAH.Size = new System.Drawing.Size(767, 345);
+            this.panelDataGrid_KAH.Size = new System.Drawing.Size(795, 345);
             this.panelDataGrid_KAH.TabIndex = 10;
             // 
             // FormAddClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(767, 643);
+            this.ClientSize = new System.Drawing.Size(795, 643);
             this.Controls.Add(this.panelDataGrid_KAH);
             this.Controls.Add(this.panelAddInfo_KAH);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelButton_KAH);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "FormAddClient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Добавить нового клиента";
-            this.panel1.ResumeLayout(false);
+            this.panelButton_KAH.ResumeLayout(false);
             this.panelAddInfo_KAH.ResumeLayout(false);
             this.groupBoxAdd_KAH.ResumeLayout(false);
             this.groupBoxAdd_KAH.PerformLayout();
@@ -321,7 +317,7 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelButton_KAH;
         private System.Windows.Forms.Panel panelAddInfo_KAH;
         private System.Windows.Forms.GroupBox groupBoxAdd_KAH;
         private System.Windows.Forms.TextBox textBoxAdress_KAH;
@@ -335,7 +331,6 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
         private System.Windows.Forms.Label labelPatronymic_KAH;
         private System.Windows.Forms.TextBox textBoxName_KAH;
         private System.Windows.Forms.TextBox textBoxSname_KAH;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonAdd_KAH;
         private System.Windows.Forms.OpenFileDialog openFileDialogTask_KAH;
         private System.Windows.Forms.SaveFileDialog saveFileDialogTask_KAH;

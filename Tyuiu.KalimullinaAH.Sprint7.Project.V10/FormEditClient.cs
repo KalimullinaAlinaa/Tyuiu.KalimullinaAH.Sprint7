@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib;
 using static Tyuiu.KalimullinaAH.Sprint7.Project.V10.Lib.DataService;
+using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
 {
@@ -70,6 +71,8 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             {
                 MessageBox.Show(ex.Message, "Ошибка!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            buttonAdd_KAH.Enabled = true;
+
         }
 
         private void buttonOpenFile_KAH_MouseEnter(object sender, EventArgs e)
@@ -88,16 +91,15 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             try
             {
 
-                // Получаем текущие данные из файла
+
                 var currentData = ds.GetData(pathClients);
 
-                // Создаём временный список для новых данных
+                //  временный список для новых данных
                 var updatedData = new List<string[]>();
 
-                // Цикл по строкам DataGridView
                 foreach (DataGridViewRow row in dataGridViewClient_KAH.Rows)
                 {
-                    // Предполагаем, что количество элементов в row соответствует текущим данным
+                    row.Visible = true;
                     if (!row.IsNewRow)
                     {
                         var rowArray = new string[row.Cells.Count];
@@ -105,15 +107,12 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                         {
                             rowArray[i] = Convert.ToString(row.Cells[i].Value);
                         }
-                        // Добавляем строки к обновлённым данным
                         updatedData.Add(rowArray);
                     }
                 }
 
-                // Сохраняем новые данные в файл
                 foreach (var line in updatedData)
                 {
-                    // Используем метод AddNewData для добавления новых данных в файл
                     if (!ds.AddNewData(pathClients, line))
                     {
                         throw new Exception("Не удалось сохранить строку данных.");
@@ -126,21 +125,18 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
             {
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            textBoxSearch_KAH.Clear();
         }
 
         private void buttonSearch_KAH_Click(object sender, EventArgs e)
         {
             string searchText = textBoxSearch_KAH.Text;
-
-            // Очищаем выделение в DataGrid
             dataGridViewClient_KAH.ClearSelection();
+            bool dataFound = false; // Variable to track if data is found
 
-            // Проходим по всем строкам в DataGrid
             foreach (DataGridViewRow row in dataGridViewClient_KAH.Rows)
             {
                 bool rowContainsSearchText = false;
-
-                // Проверяем каждую ячейку в строке на наличие искомого текста
                 foreach (DataGridViewCell cell in row.Cells)
                 {
                     if (cell.Value != null && cell.Value.ToString().Contains(searchText))
@@ -150,14 +146,19 @@ namespace Tyuiu.KalimullinaAH.Sprint7.Project.V10
                     }
                 }
 
-                // Если искомый текст найден в строке, выделяем строку
                 if (rowContainsSearchText)
                 {
                     row.Selected = true;
+                    dataGridViewClient_KAH.FirstDisplayedScrollingRowIndex = row.Index; 
+                    dataFound = true; 
                 }
             }
-        }
 
+            if (!dataFound)
+            {
+                MessageBox.Show("Данные не найдены.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
     }
 }
 
